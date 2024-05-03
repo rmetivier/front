@@ -1,0 +1,18 @@
+<p>profil works!</p>
+
+
+{{data}}
+
+
+<div *ngIf="isLoading">
+    <p>Chargement en cours...</p>
+</div>
+
+<div *ngIf="!isLoading">
+    <!-- Affichez les données récupérées ici -->
+    <ul>
+        <li *ngFor="let item of data">
+          {{ item.action }}
+        </li>
+      </ul>
+</div>

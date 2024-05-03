@@ -1,0 +1,96 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~bootstrap/dist/css/bootstrap.min.css";
+
+
+body{
+    color : #5E7C87;
+}
+
+.page {
+    background-color: white;
+    width: 100%;
+    height:100vh;
+    left: 0;
+    float:left;
+    overflow-y:hidden; 
+    overflow-x:hidden;
+}
+.blocFavoris {
+    width: 100%;
+    height:100%;
+    left: 0;
+    bottom: 0;
+    float:left;
+    overflow-y:auto; 
+    overflow-x:auto;
+}
+.blocDetail {
+    width: 100%;
+    height: calc(50vh - 30px);
+    left: 0;
+    float:bottom;
+    overflow-y:auto; 
+    overflow-x:auto;
+}
+.blocDetailMain000{
+    width: 100%;
+    height: 80%;
+}
+
+
+.detail {
+    background-color: whitesmoke;
+}
+.entete {
+    background-color: whitesmoke;
+
+}
+
+.ligne{
+    height: 5px;
+    background-color: #5E7C87;
+    width: 100%;
+}
+.ligneClose{
+    margin-top: -1px;
+}
+.btnClose{
+    padding: 5px;
+    border-bottom-left-radius : 5px;
+    border-bottom-right-radius : 5px;
+    background-color: #5E7C87;
+    text-decoration: none;
+    color: white;
+}
+
+.my100d{
+    width: 100%;
+    text-align: right;
+}
+.my100c{
+    width: 100%;
+    text-align: center;
+}
+.myspacex{
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.mybtn{
+    background-color: #5E7C87;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+  }
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey; 
+    border-radius: 10px;
+  }
+::-webkit-scrollbar-thumb {
+    background: rgb(208, 171, 223); 
+    border-radius: 10px;
+  }
+::-webkit-scrollbar-thumb:hover {
+    background: rgb(130, 105, 139); 
+  }

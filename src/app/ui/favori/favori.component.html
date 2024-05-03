@@ -1,0 +1,98 @@
+
+<div *ngIf="isLoading">
+  <p>Chargement en cours...</p>
+</div>
+
+
+<div id="favoris" class="blocFavoris" *ngIf="!isLoading">
+
+
+  
+  
+
+    <div class="my100d myspacex">
+      <span  class="myspacex" >
+        Filtre:
+        <select    (change)="onOptionSelected($event)"  id="filterCategorie" name="filterCategorie" [(ngModel)]="filterCategorie" >
+          <option value="">All</option>
+          <option *ngFor="let categorie of categorie$ | async" [value]="categorie.id">{{ categorie.title }}</option>
+        </select>
+      </span>
+      
+      <a (click)="openDetail({id:0,idCategorie:''})" class="mybtn  btn btn-primary">Add</a>
+    </div>
+    <table width="100%">
+      <ng-container *ngFor="let item of filteredData     ;  index as i">
+        <tr nxTableRow  >
+          <td><a href="{{ item.url }}">{{item.seq}}</a> </td>
+          <td><a href="{{ item.url }}">{{item.libelleCategorie}}</a> </td>
+          <td><a href="{{ item.url }}">{{item.title}}</a> </td>
+          <td><a href="{{ item.url }}">{{item.description}}</a></td>
+          <td><a (click)="openDetail(item)">  
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-wrench-adjustable" viewBox="0 0 16 16">
+              <path d="M16 4.5a4.5 4.5 0 0 1-1.703 3.526L13 5l2.959-1.11q.04.3.041.61"/>
+              <path d="M11.5 9c.653 0 1.273-.139 1.833-.39L12 5.5 11 3l3.826-1.53A4.5 4.5 0 0 0 7.29 6.092l-6.116 5.096a2.583 2.583 0 1 0 3.638 3.638L9.908 8.71A4.5 4.5 0 0 0 11.5 9m-1.292-4.361-.596.893.809-.27a.25.25 0 0 1 .287.377l-.596.893.809-.27.158.475-1.5.5a.25.25 0 0 1-.287-.376l.596-.893-.809.27a.25.25 0 0 1-.287-.377l.596-.893-.809.27-.158-.475 1.5-.5a.25.25 0 0 1 .287.376M3 14a1 1 0 1 1 0-2 1 1 0 0 1 0 2"/>
+            </svg>
+             </a></td>
+          <!--
+          <td>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up-circle-fill" viewBox="0 0 16 16">
+            <path d="M16 8A8 8 0 1 0 0 8a8 8 0 0 0 16 0m-7.5 3.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707z"/>
+          </svg>
+          </td>
+          <td>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-down-circle-fill" viewBox="0 0 16 16">
+              <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8.5 4.5a.5.5 0 0 0-1 0v5.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293z"/>
+            </svg>
+          </td>
+          -->
+        </tr>  
+      </ng-container>  
+    </table>
+</div>
+
+
+<div id="detail"  class="blocDetail detail">
+  <div class="ligne"></div> <div class="ligneClose my100c"> <a  (click)="closeDetail()"   class="btnClose">Fermer</a>&nbsp;  </div>
+  <div class="blocDetailMain">
+    <br/>
+    <!--
+    <div class="row">
+       <div class="col-6"><h3>{{favoriX.id?"Mise à jour":"Ajout"}}</h3>  </div>   
+       <div class="col-6  text-end">    id:  {{ favoriX.id }} </div>
+    </div>   
+    -->
+    <!-- {{categorie$ | async | json}} -->
+
+    <form> 
+      <div class="form-group">
+        <select id="idCategorie" name="idCategorie" [(ngModel)]="favoriX.idCategorie" required class="form-control">
+          <option value="">Sélectionnez une catégorie</option>
+          <option *ngFor="let country of categorie$ | async" [value]="country.id">{{ country.title }}</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="title">Title:</label>
+        <input type="text"  class="form-control" id="title" name="title" [(ngModel)]="favoriX.title" required placeholder="Enter title">
+      </div>
+      <div class="form-group">
+        <label for="description">Description:</label>
+        <input type="text"  class="form-control" id="description" name="description" [(ngModel)]="favoriX.description" required placeholder="Enter description">
+      </div>
+      <div class="form-group">
+        <label for="description">Url:</label>
+        <input type="text"  class="form-control" id="url" name="url" [(ngModel)]="favoriX.url" required placeholder="Enter description">
+      </div>
+      <div class="form-group">
+        <label for="description">Numéro d'ordre:</label>
+        <input type="text"  class="form-control" id="ordre" name="ordre" [(ngModel)]="favoriX.ordre" required placeholder="numéro d'ordre">
+      </div>
+    </form>
+  </div>
+  {{message}}
+  <br/>
+  <div class="my100d">
+    <a *ngIf="favoriX.id !== 0" (click)="deleteDetail()" class="mybtn btn btn-primary ">supprimer</a>&nbsp;
+    <a                          (click)="saveDetail()"   class="mybtn btn btn-primary ">sauvegarder</a>&nbsp;
+</div>
+</div>

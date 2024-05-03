@@ -1,0 +1,32 @@
+<div class="page">
+  <div class="row entete">
+      <div class="col-6">
+        <span href="#!" class="nav2" style="font-size: 200%"> Gestion des favoris </span>
+      </div>
+      <div class="col-6 text-end">
+        <!--
+        <span *ngIf="!isLogin"> 
+          <a routerLink="/login"  class="btn btn-primary"  routerLinkActive="active" >Login</a>
+        </span>
+        -->
+        <span *ngIf="isLogin">
+          | <a href="/api/initDB"  target="_new"  routerLinkActive="active" >Init Data</a>
+          | <a routerLink="/favori"    routerLinkActive="active" >Mes favoris</a>
+          | <a routerLink="/profil"    routerLinkActive="active" >{{username$ | async}}</a>
+          | <a (click)="logout()">Logout</a>
+        </span>
+      </div>
+      
+    </div>
+     <!--
+      On teste les valeurs du store
+      <a  (click)="handleClick()">Donne moi la valeur de username du store</a>
+      {{isLogin}} ** name=  ** {{username$ | async | json}}
+      username$= {{username$ | async | json }}<br/>
+      isLogin = {{isLogin}}<br/>
+      name {{name}} <br/>
+      hashcode {{hashcode}} <br/>
+      <hr/>
+    -->   
+  <router-outlet></router-outlet>
+</div>
