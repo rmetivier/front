@@ -3,7 +3,7 @@
 
 
 body{
-    color : #5E7C87;
+    color : #566573;
 }
 
 .page {
@@ -15,6 +15,23 @@ body{
     overflow-y:hidden; 
     overflow-x:hidden;
 }
+
+.blocHome {
+    Xbackground: url(assets/images/jardin.jpg) no-repeat center fixed; 
+    Xbackground-size: cover; /* version standardis�e */
+    padding: 6%;
+    width: 100%;
+    height:100%;
+    left: 0;
+    bottom: 0;
+    float:left;
+    overflow-y:auto; 
+    overflow-x:auto;
+}
+
+
+
+
 .blocFavoris {
     width: 100%;
     height:100%;
@@ -39,16 +56,16 @@ body{
 
 
 .detail {
-    background-color: whitesmoke;
+    background-color:#D0ECE7;
 }
 .entete {
-    background-color: whitesmoke;
-
+    background-color: #D0ECE7;
+    border-bottom: 1px solid #566573;
 }
 
 .ligne{
-    height: 5px;
-    background-color: #5E7C87;
+    height: 1px;
+    background-color: #566573;
     width: 100%;
 }
 .ligneClose{
@@ -58,7 +75,7 @@ body{
     padding: 5px;
     border-bottom-left-radius : 5px;
     border-bottom-right-radius : 5px;
-    background-color: #5E7C87;
+    background-color: #566573;
     text-decoration: none;
     color: white;
 }
@@ -76,9 +93,30 @@ body{
     padding-right: 10px;
 }
 
-.mybtn{
-    background-color: #5E7C87;
+.myspacexl{
+    padding-left: 5%;
+    padding-right: 5%;
 }
+
+
+
+.mybtn{
+    background-color: #566573;
+}
+
+
+.mytable {
+    background-color: white;
+}
+
+.mytable:hover {
+    background-color: #D0ECE7;
+    Xfont-style : italic;
+    transform: translateX(2px);
+}
+
+
+
 
 ::-webkit-scrollbar {
     width: 10px;

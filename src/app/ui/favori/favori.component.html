@@ -5,50 +5,44 @@
 
 
 <div id="favoris" class="blocFavoris" *ngIf="!isLoading">
-
-
-  
-  
-
+    <div style="width: 100%">
+        <input class="mytable"  style="border: none;width: 100%" type="text" [(ngModel)]="filterTexte" (ngModelChange)="filtre()" 
+        placeholder="Zone de saisie pour filtrer ...">
+    </div>
     <div class="my100d myspacex">
       <span  class="myspacex" >
-        Filtre:
+        Catégorie:
         <select    (change)="onOptionSelected($event)"  id="filterCategorie" name="filterCategorie" [(ngModel)]="filterCategorie" >
           <option value="">All</option>
           <option *ngFor="let categorie of categorie$ | async" [value]="categorie.id">{{ categorie.title }}</option>
         </select>
       </span>
-      
-      <a (click)="openDetail({id:0,idCategorie:''})" class="mybtn  btn btn-primary">Add</a>
+      <a (click)="openDetail({id:0,idCategorie:''})" class="mybtn  btn btn-primary">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
+          <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3z"/>
+        </svg>  &nbsp; Ajouter</a>
     </div>
-    <table width="100%">
-      <ng-container *ngFor="let item of filteredData     ;  index as i">
-        <tr nxTableRow  >
-          <td><a href="{{ item.url }}">{{item.seq}}</a> </td>
-          <td><a href="{{ item.url }}">{{item.libelleCategorie}}</a> </td>
-          <td><a href="{{ item.url }}">{{item.title}}</a> </td>
-          <td><a href="{{ item.url }}">{{item.description}}</a></td>
-          <td><a (click)="openDetail(item)">  
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-wrench-adjustable" viewBox="0 0 16 16">
-              <path d="M16 4.5a4.5 4.5 0 0 1-1.703 3.526L13 5l2.959-1.11q.04.3.041.61"/>
-              <path d="M11.5 9c.653 0 1.273-.139 1.833-.39L12 5.5 11 3l3.826-1.53A4.5 4.5 0 0 0 7.29 6.092l-6.116 5.096a2.583 2.583 0 1 0 3.638 3.638L9.908 8.71A4.5 4.5 0 0 0 11.5 9m-1.292-4.361-.596.893.809-.27a.25.25 0 0 1 .287.377l-.596.893.809-.27.158.475-1.5.5a.25.25 0 0 1-.287-.376l.596-.893-.809.27a.25.25 0 0 1-.287-.377l.596-.893-.809.27-.158-.475 1.5-.5a.25.25 0 0 1 .287.376M3 14a1 1 0 1 1 0-2 1 1 0 0 1 0 2"/>
-            </svg>
-             </a></td>
-          <!--
-          <td>
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up-circle-fill" viewBox="0 0 16 16">
-            <path d="M16 8A8 8 0 1 0 0 8a8 8 0 0 0 16 0m-7.5 3.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707z"/>
-          </svg>
-          </td>
-          <td>
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-down-circle-fill" viewBox="0 0 16 16">
-              <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8.5 4.5a.5.5 0 0 0-1 0v5.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293z"/>
-            </svg>
-          </td>
-          -->
-        </tr>  
-      </ng-container>  
-    </table>
+    <div class="myspacexl">
+        <table width="100%">
+            <ng-container *ngFor="let item of filteredData     ;  index as i">
+              <tr nxTableRow  class="mytable" >
+                <!--td><a href="{{ item.url }}">{{item.seq}}</a> </td-->
+                <td>{{item.libelleCategorie}} </td>
+                <td><a href="{{ item.url }}" target="_new">{{item.title}}</a>,
+                    <span [innerHTML]="item.description"></span>
+                </td>
+                <td><a (click)="openDetail(item)">  
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-gear" viewBox="0 0 16 16">
+                    <path d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492M5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0"/>
+                    <path d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 0 0 2.693 1.115l.291-.16c.764-.415 1.6.42 1.184 1.185l-.159.292a1.873 1.873 0 0 0 1.116 2.692l.318.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 0 0-1.115 2.693l.16.291c.415.764-.42 1.6-1.185 1.184l-.291-.159a1.873 1.873 0 0 0-2.693 1.116l-.094.318c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 0 0-2.692-1.115l-.292.16c-.764.415-1.6-.42-1.184-1.185l.159-.291A1.873 1.873 0 0 0 1.945 8.93l-.319-.094c-.835-.246-.835-1.428 0-1.674l.319-.094A1.873 1.873 0 0 0 3.06 4.377l-.16-.292c-.415-.764.42-1.6 1.185-1.184l.292.159a1.873 1.873 0 0 0 2.692-1.115z"/>
+                  </svg>
+
+                   </a></td>
+              </tr>  
+            </ng-container>  
+          </table>    
+    </div>
+
 </div>
 
 

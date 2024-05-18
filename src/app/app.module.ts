@@ -15,7 +15,7 @@ import { HttpClientModule } from '@angular/common/http'; // Importez HttpClientM
 
 
 const routes: Routes = [
-  {path: 'login', component: LoginComponent},
+   
   {path: 'profil', component: ProfilComponent , canActivate: [AuthGuard]},
   {path: 'favori', component: FavoriComponent , canActivate: [AuthGuard]},
 ]

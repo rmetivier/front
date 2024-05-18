@@ -4,6 +4,7 @@ import { Beanfavori } from './favori.model';
 import { Observable } from 'rxjs';
 import { Store,select } from '@ngrx/store';
 import { getCategories } from '../../store/user.selectors';
+//import { string } from 'tls';
 
 
 @Component({
@@ -13,15 +14,16 @@ import { getCategories } from '../../store/user.selectors';
 })
 
 export class FavoriComponent implements OnInit {
-  data:         Beanfavori[] = [];
-  filteredData: any;
+  data:            Beanfavori[] = [];
+  filteredData:    any;
   //filteredItems: Item[] = [...this.items];
-  isLoading:  boolean          = false;
-  favoriX:    Beanfavori       = {};
-  categorie$: Observable<any>;
-  message:    String           = "";
-
+  isLoading:       boolean          = false;
+  isOk:            boolean          = false;
+  favoriX:         Beanfavori       = {};
+  categorie$:      Observable<any>;
+  message:         String           = "";
   filterCategorie: String = "";
+  filterTexte:     String = "";
   constructor(private store: Store,private api: Api,private renderer: Renderer2, private elementRef: ElementRef) {
     this.categorie$ = this.store.pipe(select(getCategories));
   }
@@ -125,26 +127,43 @@ export class FavoriComponent implements OnInit {
     // Exécuter votre script ou vos actions ici
   }
 
+
+
   filtre(){
-    if (this.filterCategorie === "") {
+    if (this.filterCategorie === "" && this.filterTexte === "" ) {
       this.filteredData = this.data;
     } else {
-    //  const age = parseInt(selectedAge, 10);
-      this.filteredData = this.data.filter(item => item.idCategorie == this.filterCategorie);
-      //this.filteredData = this.data.filter(item => "2" === this.filterCategorie);
-      //this.filteredData = this.data.filter(item => item.idCategorie  = "1");
-    /*
+      //this.filteredData = this.data.filter(item => item.idCategorie == this.filterCategorie);
+      this.filteredData = [];
       this.data.forEach((item, index) => {
-        console.log(item) //value
-        console.log(index) //index
-        if(item.idCategorie == this.filterCategorie){
+        this.isOk = true;
+        if (this.filterCategorie !== "" &&  item.idCategorie != this.filterCategorie){
+          this.isOk = false;
+        }  
+        if (this.filterTexte !== "" && this.filtreContient(item) == false)  {
+          this.isOk = false;
+        }  
+        if (this.isOk === true){  
           this.filteredData.push(item)
         }
       })
-*/
-
     }
     
   }
+    filtreContient(item:any){
+      debugger;
+      console.log(item); //value
+      console.log(item.title); //value
+      console.log(item.title.indexOf(this.filterTexte)); //value
+      var  x = (""+ item.title + item.description).toUpperCase();
+      var  y = ("" +this.filterTexte).toUpperCase();
+      console.log(x); //value
+      if (x.indexOf(y) == -1 ){
+        return false;  
+      }
+      return true;
+    }
+    
+ 
 
 }

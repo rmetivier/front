@@ -2,13 +2,19 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
+//import { environment } from './../../../environnements/environment';
+
+import { environment } from 'src/environnements/environment';
+
 @Injectable({
     providedIn: 'root'
 })
 export class Api {
-    private backendUrl = 'http://localhost:4200/api'; // Remplacez cela par l'URL de votre backend
+    private backendUrl = ''; 
 
-    constructor(private http: HttpClient) { }
+    constructor(private http: HttpClient) {
+        this.backendUrl=environment.apiUrlServeurBack;
+     }
 
     fetchFavoris(): Observable<any> {
         return this.http.get<any>(`${this.backendUrl}/favoris`);

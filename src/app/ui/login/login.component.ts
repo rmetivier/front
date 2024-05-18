@@ -35,6 +35,10 @@ export class LoginComponent implements OnInit {
          this.userService.login(username, password,this.categories);
       },
       (error) => {
+        if (error.status === 404) {
+          alert('user invalide');
+        }
+        debugger;
         // Gestion de l'erreur
         console.error(error);
       }

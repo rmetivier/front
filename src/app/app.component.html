@@ -1,32 +1,37 @@
 <div class="page">
   <div class="row entete">
       <div class="col-6">
-        <span href="#!" class="nav2" style="font-size: 200%"> Gestion des favoris </span>
+          <img src="assets/images/favori.png" height="52px"/>
+        <span  *ngIf="isLogin"   href="#!" class="nav2" style="font-size: 200%"> 
+          Favori4me 
+        </span>
       </div>
       <div class="col-6 text-end">
-        <!--
-        <span *ngIf="!isLogin"> 
-          <a routerLink="/login"  class="btn btn-primary"  routerLinkActive="active" >Login</a>
-        </span>
-        -->
-        <span *ngIf="isLogin">
-          | <a href="/api/initDB"  target="_new"  routerLinkActive="active" >Init Data</a>
+        <span *ngIf="!isLogin">  <app-login/>    </span>
+        <span *ngIf="isLogin" class="myspacex">
+            Welcome {{username$ | async}} 
+          <!--| <a href="/api/initDB"  target="_new"  routerLinkActive="active" >Init Data</a> 
           | <a routerLink="/favori"    routerLinkActive="active" >Mes favoris</a>
           | <a routerLink="/profil"    routerLinkActive="active" >{{username$ | async}}</a>
+          -->
           | <a (click)="logout()">Logout</a>
         </span>
       </div>
+  </div> <!--Fin entete -->
+  <div *ngIf="!isLogin"   class="blocHome" >
+    
+      <h1> Site gratuit pour tous ayant 3 objectifs:</h1>
+      <ul>
+        <li><h2>Stocker et retrouver facilement ses favoris.</h2></li>
+        <li><h2>Faire de la veille techno pour construire un site dernière génération avec front Angular & backend SpringBoot/Mysql</h2>
+        <li><h2>Partager le code et le rendre dispo sous github.</h2>
+          <br> Code source Front Angular  accessible <a href="https://github.com/rmetivier/front">ici</a>,
+           Code source Back SpringBoot accessible <a href="https://github.com/rmetivier/backend">ici</a>
+        </li>
+      </ul>
       
-    </div>
-     <!--
-      On teste les valeurs du store
-      <a  (click)="handleClick()">Donne moi la valeur de username du store</a>
-      {{isLogin}} ** name=  ** {{username$ | async | json}}
-      username$= {{username$ | async | json }}<br/>
-      isLogin = {{isLogin}}<br/>
-      name {{name}} <br/>
-      hashcode {{hashcode}} <br/>
-      <hr/>
-    -->   
+  </div>
+
+  
   <router-outlet></router-outlet>
 </div>
