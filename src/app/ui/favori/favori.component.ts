@@ -4,8 +4,6 @@ import { Beanfavori } from './favori.model';
 import { Observable } from 'rxjs';
 import { Store,select } from '@ngrx/store';
 import { getCategories } from '../../store/user.selectors';
-//import { string } from 'tls';
-
 
 @Component({
   selector: 'app-favori',
@@ -16,7 +14,6 @@ import { getCategories } from '../../store/user.selectors';
 export class FavoriComponent implements OnInit {
   data:            Beanfavori[] = [];
   filteredData:    any;
-  //filteredItems: Item[] = [...this.items];
   isLoading:       boolean          = false;
   isOk:            boolean          = false;
   favoriX:         Beanfavori       = {};
@@ -27,9 +24,10 @@ export class FavoriComponent implements OnInit {
   constructor(private store: Store,private api: Api,private renderer: Renderer2, private elementRef: ElementRef) {
     this.categorie$ = this.store.pipe(select(getCategories));
   }
+
   ngOnInit(): void {
     // On appelle le serveur
-    this.api.fetchFavoris()
+    this.api.getFavoris()
     .subscribe(
       (data) => {
         this.data = data;
@@ -48,6 +46,7 @@ export class FavoriComponent implements OnInit {
       complete: () => console.log('Observable complet')
     });
   }
+
   openDetail(item:Beanfavori) {
     this.message         = "";
     this.favoriX         =  item;
@@ -113,21 +112,6 @@ export class FavoriComponent implements OnInit {
       return; 
     }
   }
-  
-
-  //applyFilter(column: string, value: string): void {
-    //this.filteredItems = this.items.filter(item => {
-    //  const itemValue = item[column].toString().toLowerCase();
-    //  return itemValue.includes(value.toLowerCase());
-    //});
-  //}
-  onOptionSelected($event: any): void {
-    console.log("Option sélectionnée :" + $event + ">>>" + this.filterCategorie);
-    this.filtre();
-    // Exécuter votre script ou vos actions ici
-  }
-
-
 
   filtre(){
     if (this.filterCategorie === "" && this.filterTexte === "" ) {
@@ -150,20 +134,18 @@ export class FavoriComponent implements OnInit {
     }
     
   }
-    filtreContient(item:any){
-      debugger;
-      console.log(item); //value
-      console.log(item.title); //value
-      console.log(item.title.indexOf(this.filterTexte)); //value
-      var  x = (""+ item.title + item.description).toUpperCase();
-      var  y = ("" +this.filterTexte).toUpperCase();
-      console.log(x); //value
-      if (x.indexOf(y) == -1 ){
-        return false;  
-      }
-      return true;
+  filtreContient(item:any){
+    debugger;
+    console.log(item); //value
+    console.log(item.title); //value
+    console.log(item.title.indexOf(this.filterTexte)); //value
+    var  x = (""+ item.title + item.description).toUpperCase();
+    var  y = ("" +this.filterTexte).toUpperCase();
+    console.log(x); //value
+    if (x.indexOf(y) == -1 ){
+      return false;  
     }
-    
- 
+    return true;
+  }
 
 }

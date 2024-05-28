@@ -7,7 +7,7 @@ import { UserService } from './store/user.service';
 import { UserState } from './store/user.reducer';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
-
+import { environment } from 'src/environnements/environment';
 
 @Component({
   selector: 'app-root',
@@ -16,19 +16,21 @@ import { Subject } from 'rxjs';
 })
 
 export class AppComponent  implements OnInit {
-  public title:     string  = 'socialFront';
+  public isProd:    boolean = true;
   public username$: Observable<string>;
   public name:      string  = "";
   public hashcode:  string  = ""; 
   public isLogin:   boolean = false;
   private _ngUnsubscribe = new Subject();
 
-
-  constructor(private cd: ChangeDetectorRef, private store: Store,private userService: UserService,private router: Router) {
+  constructor(private cd: ChangeDetectorRef,
+              private store: Store,
+              private userService: UserService,
+              private router: Router) {
+    this.isProd=environment.production;            
     this.username$ = this.store.pipe(select(getUsername));
   }
-    
-    
+     
   ngOnInit() {
     this.store
       .select(getUser)
@@ -42,9 +44,6 @@ export class AppComponent  implements OnInit {
       });
   }
 
- 
-
-
   handleClick() {
     console.log('Le lien a été cliqué');
     alert('valeur de ' +  JSON.stringify(this.hashcode)) ;
@@ -57,10 +56,8 @@ export class AppComponent  implements OnInit {
     this.router.navigate(['/']);
   }
 
-
   public ngOnDestroy(): void {
     this._ngUnsubscribe.complete();
   }
-
 
 }

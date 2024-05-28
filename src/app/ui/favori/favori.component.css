@@ -1,0 +1,13 @@
+
+.mysearch {
+    background-color: white;
+}
+
+.mysearch:hover {
+    background-color: #D0ECE7;
+}
+
+.mysearch:focus {
+    border: none;
+    outline: none; /* Supprime également la bordure de focus par défaut du navigateur */
+  }

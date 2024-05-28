@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-
-//import { environment } from './../../../environnements/environment';
-
+import { Store } from '@ngrx/store';
+import { UserState } from 'src/app/store/user.reducer';
+import { getUser } from 'src/app/store/user.selectors';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { environment } from 'src/environnements/environment';
 
 @Injectable({
@@ -11,13 +13,33 @@ import { environment } from 'src/environnements/environment';
 })
 export class Api {
     private backendUrl = ''; 
+    private _ngUnsubscribe = new Subject();
+    public  name:      string  = "";
+    public  userid:    string  = "";
 
-    constructor(private http: HttpClient) {
+    constructor(private store: Store<UserState>,private http: HttpClient) {
         this.backendUrl=environment.apiUrlServeurBack;
+        this.store
+            .select(getUser)
+            .pipe(takeUntil(this._ngUnsubscribe))
+            .subscribe((userSession: UserState) => {
+                  if (userSession) {this.name     = userSession.username?userSession.username:"";}
+                  if (userSession) {this.userid   = userSession.userid?userSession.userid:"";}
+                });
+     }
+ 
+
+     buildHeader(){
+         return new HttpHeaders({
+            'userId':  this.userid ,
+            'Content-Type': 'application/json'
+          });
      }
 
-    fetchFavoris(): Observable<any> {
-        return this.http.get<any>(`${this.backendUrl}/favoris`);
+     
+     getFavoris(): Observable<any> {
+        const headers = this.buildHeader();
+        return this.http.get<any>(`${this.backendUrl}/favoris`,{ headers });
     }
 
     fetchDataToDo(): Observable<any> {
@@ -32,8 +54,13 @@ export class Api {
         return this.http.post<any>(`${this.backendUrl}/login`, data);
     }
 
+    postOauth2(data: any): Observable<any> {
+        return this.http.post<any>(`${this.backendUrl}/oauth2`, data);
+    }
+
     postFavori(data: any): Observable<any> {
-        return this.http.post<any>(`${this.backendUrl}/favoris`, data);
+        const headers = this.buildHeader();
+        return this.http.post<any>(`${this.backendUrl}/favoris`, data ,{ headers });
     }
 
     deleteFavori(data: any): Observable<any> {

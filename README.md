@@ -7,11 +7,11 @@ Info pour lancer le projet sur sa machine de DEV:
 
 Info perso pour le déploiement sur infra Contabo:
          
-            <br> pour le déploiement du front:
+        <br> pour le déploiement du front:
             <br> - faire un npm run build et mettre le contenu de dist dans D:\dev\projets\docrichard\serveurLinuxContabo\dockercompose\favori\distAngular
             <br> - pousser le code sur le serveur
             <br> - relancer le dockercompose 
-            <br> pour le back:
+        <br> pour le back:
             <br> - faire un maven clean install
             <br> - faire une copie du *.jar généré vers *.txt dans   D:\dev\projets\docrichard\serveurLinuxContabo\dockercompose\favori\dockerfileJava 
             <br> - pousser le code sur le serveur

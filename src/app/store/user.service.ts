@@ -10,10 +10,10 @@ import { login, logout } from './user.actions';
 export class UserService {
   constructor(private store: Store) {}
 
-  login(username: string, password: string, categories: any) {
+  login(username: string, userid: string, categories: any) {
     // Simuler une authentification réussie
     //if (username === 'user' && password === 'password') {
-      this.store.dispatch(login({ username:username,hashcode: password ,categories:categories}));
+      this.store.dispatch(login({ username:username,userid: userid ,categories:categories}));
     //}
   }
 

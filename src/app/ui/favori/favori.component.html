@@ -6,13 +6,13 @@
 
 <div id="favoris" class="blocFavoris" *ngIf="!isLoading">
     <div style="width: 100%">
-        <input class="mytable"  style="border: none;width: 100%" type="text" [(ngModel)]="filterTexte" (ngModelChange)="filtre()" 
+        <input class="mysearch"  style="border: none;width: 100%" type="text" [(ngModel)]="filterTexte" (ngModelChange)="filtre()" 
         placeholder="Zone de saisie pour filtrer ...">
     </div>
     <div class="my100d myspacex">
       <span  class="myspacex" >
         Catégorie:
-        <select    (change)="onOptionSelected($event)"  id="filterCategorie" name="filterCategorie" [(ngModel)]="filterCategorie" >
+        <select    (change)="filtre()"  id="filterCategorie" name="filterCategorie" [(ngModel)]="filterCategorie" >
           <option value="">All</option>
           <option *ngFor="let categorie of categorie$ | async" [value]="categorie.id">{{ categorie.title }}</option>
         </select>
@@ -58,7 +58,7 @@
     -->
     <!-- {{categorie$ | async | json}} -->
 
-    <form> 
+    <form class="myspacex"> 
       <div class="form-group">
         <select id="idCategorie" name="idCategorie" [(ngModel)]="favoriX.idCategorie" required class="form-control">
           <option value="">Sélectionnez une catégorie</option>
