@@ -1,0 +1,10 @@
+<div *ngIf="message && show" [@messageState]="show ? 'visible' : 'hidden'" [ngClass]="{
+    'message': true,
+    'message-success': message.type === 'success',
+    'message-error': message.type === 'error',
+    'message-info': message.type === 'info',
+    'message-warning': message.type === 'warning'
+  }">
+    <span>{{ message.text }}</span>
+  </div>
+  

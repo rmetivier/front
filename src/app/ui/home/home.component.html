@@ -1,0 +1,39 @@
+<div *ngIf="isLoading">
+    <div class="load-bar">
+            <div class="bar">  </div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+    </div>
+    Chargement de l'application ...
+</div>
+
+
+<div *ngIf="!isLoading" class="gauche">
+    <div [ngStyle]="{'background-image': 'url(' + backgroundImageUrl + ')'}" 
+         class="background-div">
+    </div>
+</div> <!-- fin gauche-->
+<div *ngIf="!isLoading" class="droite ">
+    <div class="droiteContent">
+            <div class="content">
+                    <h2>Si vous cherchez une solution efficace pour gérer vos liens préférés, vous êtes au bon endroit.<br></h2>
+                    <br/>
+                    <div [innerHTML]="currentText"></div>
+            </div>
+            <div class="footer">
+                <a class="mybtn" *ngIf="!isProd"
+                    href="https://accounts.google.com/o/oauth2/v2/auth?scope=email&access_type=online&include_granted_scopes=true&response_type=code&state=state_parameter_passthrough_value&redirect_uri=http://localhost:4200/&client_id=69992971949-sggkh37fq9o0c9ecthpd0cevmgpa06ut.apps.googleusercontent.com"
+                    >
+                    Se connecter avec son compte Google (local) 
+                </a>
+                <a class="mybtn" *ngIf="isProd" 
+                   href="https://accounts.google.com/o/oauth2/v2/auth?scope=email&access_type=online&include_granted_scopes=true&response_type=code&state=state_parameter_passthrough_value&redirect_uri=https://4me.elearnchess.com/&client_id=69992971949-sggkh37fq9o0c9ecthpd0cevmgpa06ut.apps.googleusercontent.com"
+                   >
+                   Se connecter avec son compte Google
+                </a>
+                
+            </div> 
+    </div>
+       
+</div>
+  

@@ -8,6 +8,7 @@ import { UserState } from './store/user.reducer';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { environment } from 'src/environnements/environment';
+import { MessageService } from './message/message.service';
 
 @Component({
   selector: 'app-root',
@@ -26,11 +27,18 @@ export class AppComponent  implements OnInit {
   constructor(private cd: ChangeDetectorRef,
               private store: Store,
               private userService: UserService,
-              private router: Router) {
+              private router: Router,
+              private messageService: MessageService
+              ) {
     this.isProd=environment.production;            
     this.username$ = this.store.pipe(select(getUsername));
   }
-     
+  
+  showSuccess() {
+    this.messageService.showMessage({ type: 'success', text: 'This is a success message!', duration: 3000 });
+  }
+
+
   ngOnInit() {
     this.store
       .select(getUser)
@@ -50,11 +58,7 @@ export class AppComponent  implements OnInit {
     //this.userService.login("username", "password");
   }
 
-  logout() {
-    this.isLogin = false;
-    this.userService.logout();
-    this.router.navigate(['/']);
-  }
+
 
   public ngOnDestroy(): void {
     this._ngUnsubscribe.complete();

@@ -64,7 +64,11 @@ export class Api {
     }
 
     deleteFavori(data: any): Observable<any> {
-        return this.http.delete<any>(`${this.backendUrl}/favoris`, { body: data });
+        const options = {
+            headers: this.buildHeader(),
+            body: data
+          };
+        return this.http.delete<any>(`${this.backendUrl}/favoris`, options );
     }
 
     /*deleteData(id: number, body: any): Observable<any> {

@@ -1,28 +1,51 @@
-
 <div *ngIf="isLoading">
   <p>Chargement en cours...</p>
 </div>
 
-
-<div id="favoris" class="blocFavoris" *ngIf="!isLoading">
-    <div style="width: 100%">
-        <input class="mysearch"  style="border: none;width: 100%" type="text" [(ngModel)]="filterTexte" (ngModelChange)="filtre()" 
-        placeholder="Zone de saisie pour filtrer ...">
-    </div>
-    <div class="my100d myspacex">
-      <span  class="myspacex" >
-        Catégorie:
-        <select    (change)="filtre()"  id="filterCategorie" name="filterCategorie" [(ngModel)]="filterCategorie" >
-          <option value="">All</option>
-          <option *ngFor="let categorie of categorie$ | async" [value]="categorie.id">{{ categorie.title }}</option>
+<div class="menu">
+    <div class="item"><img src="assets/images/favori.png" height="62px"/></div>
+    <div class="vertical-line"></div>
+    <div class="item" style="font-size:-1;">Gestion <br/>des favoris</div>
+    <div class="item">
+       <div class="input-container">
+          <input  type="text" id="search-input"  [(ngModel)]="filterTexte" (ngModelChange)="filtre()" placeholder="Recherche"
+          style="padding-left: 40px">
+          <button id="clear-button" (click)="clearInput()">&#x2715;</button>
+      </div>
+    </div> 
+    <div class="item">
+       <select name="valueSpecialites"    (change)="filtre()"  id="filterCategorie" name="filterCategorie" [(ngModel)]="filterCategorie" >
+            <option value="">All</option>
+            <option *ngFor="let categorie of categorie$ | async" [value]="categorie.id">{{ categorie.title }}</option>
         </select>
-      </span>
-      <a (click)="openDetail({id:0,idCategorie:''})" class="mybtn  btn btn-primary">
+    </div>
+    <div class="item"><b> {{username$ | async}}</b>  </div>
+    <div class="vertical-line2"></div>
+    <div class="item hover" (click)="logout()" >Logout</div>
+</div>
+<div class="horizontal-line"></div>
+<div class="menu">
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item hover" (click)="openDetail({id:0,idCategorie:''})">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
           <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3z"/>
-        </svg>  &nbsp; Ajouter</a>
+        </svg>
+      Nouveau
     </div>
-    <div class="myspacexl">
+</div>
+<div class="horizontal-line"></div>
+
+
+<!-- -->
+
+
+<div id="favoris" class="blocFavoris" *ngIf="!isLoading">
+
+    <div class="myspacexl">  
+    <br/>  
+    <div class="bordure">
         <table width="100%">
             <ng-container *ngFor="let item of filteredData     ;  index as i">
               <tr nxTableRow  class="mytable" >
@@ -42,51 +65,58 @@
             </ng-container>  
           </table>    
     </div>
-
+    <br/>  
+  </div>  
 </div>
 
 
 <div id="detail"  class="blocDetail detail">
-  <div class="ligne"></div> <div class="ligneClose my100c"> <a  (click)="closeDetail()"   class="btnClose">Fermer</a>&nbsp;  </div>
-  <div class="blocDetailMain">
-    <br/>
-    <!--
-    <div class="row">
-       <div class="col-6"><h3>{{favoriX.id?"Mise à jour":"Ajout"}}</h3>  </div>   
-       <div class="col-6  text-end">    id:  {{ favoriX.id }} </div>
-    </div>   
-    -->
-    <!-- {{categorie$ | async | json}} -->
+  <div class="ligne"></div> <div class="ligneClose my100c"> <a  (click)="closeDetail()"   class="btnClose">&nbsp;&nbsp;Fermer&nbsp;&nbsp;</a>&nbsp;  </div>
+  <div class="blocDetailContent">
+    <form class="paddingtop"> 
+      <table width="100%">
+        <tr>
+          <td width="5%"></td>
+          <td>
+              <div class="form-group">
+                  <select id="idCategorie" name="idCategorie" [(ngModel)]="favoriX.idCategorie" required class="form-control" placeholder="">
+                      <option value="Sélectionnez une catégorie">Sélectionnez une catégorie</option>
+                      <option value="projet">projet</option>
+                      <option *ngFor="let cat of categorie$ | async" [value]="cat.id">{{ cat.title }}</option>
+                    </select>
+                  <label for="idCategorie">Catégorie</label>
+              </div>    
+              <div class="form-group">
+                      <input type="text"  class="form-control" id="title" name="title" [(ngModel)]="favoriX.title" required placeholder="">
+                      <label for="title">Titre</label>
+              </div>
+              <div class="form-group">
+                  <textarea    class="form-control" id="description" name="description" [(ngModel)]="favoriX.description" required placeholder="">
+                  </textarea>
+                  <label for="description">description</label>
+              </div>
+              <div class="form-group">
+                  <input type="text"  class="form-control" id="url" name="url" [(ngModel)]="favoriX.url" required placeholder="">
+                  <label for="url">Url</label>
+              </div>
+              <div class="form-group">
+                  <input type="text"  class="form-control" id="ordre" name="ordre" [(ngModel)]="favoriX.ordre" required placeholder="">
+                  <label for="ordre">Ordre</label>
+              </div>
 
-    <form class="myspacex"> 
-      <div class="form-group">
-        <select id="idCategorie" name="idCategorie" [(ngModel)]="favoriX.idCategorie" required class="form-control">
-          <option value="">Sélectionnez une catégorie</option>
-          <option *ngFor="let country of categorie$ | async" [value]="country.id">{{ country.title }}</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label for="title">Title:</label>
-        <input type="text"  class="form-control" id="title" name="title" [(ngModel)]="favoriX.title" required placeholder="Enter title">
-      </div>
-      <div class="form-group">
-        <label for="description">Description:</label>
-        <input type="text"  class="form-control" id="description" name="description" [(ngModel)]="favoriX.description" required placeholder="Enter description">
-      </div>
-      <div class="form-group">
-        <label for="description">Url:</label>
-        <input type="text"  class="form-control" id="url" name="url" [(ngModel)]="favoriX.url" required placeholder="Enter description">
-      </div>
-      <div class="form-group">
-        <label for="description">Numéro d'ordre:</label>
-        <input type="text"  class="form-control" id="ordre" name="ordre" [(ngModel)]="favoriX.ordre" required placeholder="numéro d'ordre">
-      </div>
+              
+          </td>
+          <td width="5%"></td>
+          <td> 
+              <p style="color:red;"> {{message}} </p>
+              <a                          (click)="saveDetail()"   class="mybtn">Sauvegarder</a><br/><br/><br/>
+              <a *ngIf="favoriX.id !== 0" (click)="deleteDetail()" class="mybtn">Supprimer</a>
+          </td>
+          <td width="5%"></td>
+        </tr>
+      </table>
     </form>
   </div>
-  {{message}}
-  <br/>
-  <div class="my100d">
-    <a *ngIf="favoriX.id !== 0" (click)="deleteDetail()" class="mybtn btn btn-primary ">supprimer</a>&nbsp;
-    <a                          (click)="saveDetail()"   class="mybtn btn btn-primary ">sauvegarder</a>&nbsp;
-</div>
+    <br/>
+ 
 </div>

@@ -5,9 +5,61 @@
 
 .mysearch:hover {
     background-color: #D0ECE7;
+    
 }
 
 .mysearch:focus {
     border: none;
     outline: none; /* Supprime également la bordure de focus par défaut du navigateur */
   }
+
+
+.bordure{
+    background-color: white;
+    margin: 10px;
+    padding: 30px;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    border-radius: 8px;
+    Xborder: 1px solid #D1FDD7;
+    box-shadow: 1px 2px 6px 0 rgba(23, 40, 52, 0.08)
+}
+
+
+
+  .blocFavoris {
+    width: 100%;
+    height: calc(100vh - 128px);
+    left: 0;
+    bottom: 0;
+    float:left;
+    overflow-y:auto; 
+    overflow-x:auto;
+    transition:1s;
+
+}
+.blocDetail {
+    width: 100%;
+    height: calc(50vh - 128px);
+    left: 0;
+    float:bottom;
+    overflow-y:auto; 
+    overflow-x:auto;
+}  
+
+.detail{
+    background-color: white;
+}
+
+.blocDetailContent {
+    width: 100%;
+    height: calc(50vh - 128px);
+    left: 0;
+    float:bottom;
+    overflow-y:auto; 
+    overflow-x:auto;
+} 
+ 
+.paddingtop{
+    padding-top: 14px;
+}

@@ -4,6 +4,10 @@ import { Beanfavori } from './favori.model';
 import { Observable } from 'rxjs';
 import { Store,select } from '@ngrx/store';
 import { getCategories } from '../../store/user.selectors';
+import { MessageService } from '../../message/message.service';
+import { UserService } from '../../store/user.service';
+import { getUsername, isLoggedIn,getUser } from '../../store/user.selectors';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-favori',
@@ -21,8 +25,16 @@ export class FavoriComponent implements OnInit {
   message:         String           = "";
   filterCategorie: String = "";
   filterTexte:     String = "";
-  constructor(private store: Store,private api: Api,private renderer: Renderer2, private elementRef: ElementRef) {
-    this.categorie$ = this.store.pipe(select(getCategories));
+   username$:      Observable<string>;
+  constructor(private store: Store,private api: Api,
+              private renderer: Renderer2, 
+              private elementRef: ElementRef,
+              private router: Router,
+              private userService: UserService,
+              private messageService: MessageService) {
+                          this.username$ = this.store.pipe(select(getUsername));
+                          this.categorie$ = this.store.pipe(select(getCategories));
+
   }
 
   ngOnInit(): void {
@@ -52,13 +64,14 @@ export class FavoriComponent implements OnInit {
     this.favoriX         =  item;
     const elementFavoris = document.getElementById('favoris');
     const elementDetail  = document.getElementById('detail');
-    if (elementFavoris) {this.renderer.setStyle(elementFavoris, 'height', 'calc(50vh - 30px)');}
+    if (elementFavoris) {this.renderer.setStyle(elementFavoris, 'height', 'calc(50vh - 47px)');}
+    if (elementFavoris) {this.renderer.setStyle(elementDetail, 'height', 'calc(50vh - 47px)');}
     if (elementDetail)  {this.renderer.setStyle(elementDetail, 'visibility', 'visible');}
   }
   closeDetail() {
     const elementFavoris = document.getElementById('favoris');
     const elementDetail  = document.getElementById('detail');
-    if (elementFavoris) {this.renderer.setStyle(elementFavoris, 'height', '100%');}
+    if (elementFavoris) {this.renderer.setStyle(elementFavoris, 'height', ' calc(100vh - 98px)');}
     if (elementDetail) { this.renderer.setStyle(elementDetail, 'visibility', 'hidden'); }
   }
   saveDetail() {
@@ -68,6 +81,7 @@ export class FavoriComponent implements OnInit {
       this.api.postFavori(this.favoriX)
       .subscribe(
         (data) => {
+          this.messageService.showMessage({ type: 'success', text: 'save done !', duration: 3000 });
           this.data = data;
           this.filtre();
           this.isLoading = false; 
@@ -79,7 +93,7 @@ export class FavoriComponent implements OnInit {
       );
       const elementFavoris = document.getElementById('favoris');
       const elementDetail  = document.getElementById('detail');
-      if (elementFavoris) {this.renderer.setStyle(elementFavoris, 'height', '100%');}
+      if (elementFavoris) {this.renderer.setStyle(elementFavoris, 'height', ' calc(100vh - 98px)');}
       if (elementDetail) { this.renderer.setStyle(elementDetail, 'visibility', 'hidden'); }
     }
   }
@@ -90,8 +104,10 @@ export class FavoriComponent implements OnInit {
       this.api.deleteFavori(this.favoriX)
       .subscribe(
         (data) => {
+          this.messageService.showMessage({ type: 'success', text: 'delete done !', duration: 3000 });
           this.data = data;
           this.isLoading = false; 
+          this.filtre();
         },
         (error) => {
           this.isLoading = false; 
@@ -100,7 +116,7 @@ export class FavoriComponent implements OnInit {
       );
       const elementFavoris = document.getElementById('favoris');
       const elementDetail  = document.getElementById('detail');
-      if (elementFavoris) {this.renderer.setStyle(elementFavoris, 'height', '100%');}
+      if (elementFavoris) {this.renderer.setStyle(elementFavoris, 'height', ' calc(100vh - 98px)');}      
       if (elementDetail) { this.renderer.setStyle(elementDetail, 'visibility', 'hidden'); }
     }
   }
@@ -114,6 +130,7 @@ export class FavoriComponent implements OnInit {
   }
 
   filtre(){
+    debugger;
     if (this.filterCategorie === "" && this.filterTexte === "" ) {
       this.filteredData = this.data;
     } else {
@@ -147,5 +164,18 @@ export class FavoriComponent implements OnInit {
     }
     return true;
   }
+
+  logout() {
+    this.userService.logout();
+    this.router.navigate(['/']);
+  }
+
+  clearInput(){
+    this.filterTexte = "";
+    this. filtre();
+
+  }
+
+  
 
 }

@@ -11,7 +11,10 @@ import { AppComponent } from './app.component';
 import { ProfilComponent } from './ui/profil/profil.component';
 import { LoginComponent } from './ui/login/login.component';
 import { FavoriComponent } from './ui/favori/favori.component';
+import { HomeComponent } from './ui/home/home.component';
 import { HttpClientModule } from '@angular/common/http'; // Importez HttpClientModule
+import { MessageComponent } from './message/message.component';
+
 
 
 const routes: Routes = [
@@ -25,7 +28,9 @@ const routes: Routes = [
     AppComponent,
     ProfilComponent,
     LoginComponent,
-    FavoriComponent
+    FavoriComponent,
+    MessageComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,

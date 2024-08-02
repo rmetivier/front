@@ -4,10 +4,37 @@
 
 body{
     color : #566573;
+    font-size: clamp(16px, 2vw, 24px); /* Utilise clamp() pour définir une taille de police adaptative */
+    margin: 0;
+    padding: 0px;
+    xline-height: 1.5;
+}
+h1 {
+    font-size: calc(24px + 2vw); /* Utilise calc() pour une taille de police dynamique */
+}
+p {
+    font-size: 1em; /* Utilise l'unité em pour que la taille de police soit relative au body */
+}
+@media (min-width: 600px) {
+    body {
+        font-size: 18px; /* Taille de police pour les écrans de 600px et plus */
+    }
+}
+@media (min-width: 900px) {
+    body {
+        font-size: 20px; /* Taille de police pour les écrans de 900px et plus */
+    }
+}
+@media (min-width: 1200px) {
+    body {
+        font-size: 24px; /* Taille de police pour les écrans de 1200px et plus */
+    }
 }
 
+
+
 .page {
-    background-color: white;
+    background-color: #F8F9F9;
     width: 100%;
     height:100vh;
     left: 0;
@@ -16,9 +43,9 @@ body{
     overflow-x:hidden;
 }
 
+ 
+
 .blocHome {
-    Xbackground: url(assets/images/jardin.jpg) no-repeat center fixed; 
-    Xbackground-size: cover; /* version standardis�e */
     padding: 6%;
     width: 100%;
     height:100%;
@@ -29,39 +56,10 @@ body{
     overflow-x:auto;
 }
 
+ 
 
 
 
-.blocFavoris {
-    width: 100%;
-    height:100%;
-    left: 0;
-    bottom: 0;
-    float:left;
-    overflow-y:auto; 
-    overflow-x:auto;
-}
-.blocDetail {
-    width: 100%;
-    height: calc(50vh - 30px);
-    left: 0;
-    float:bottom;
-    overflow-y:auto; 
-    overflow-x:auto;
-}
-.blocDetailMain000{
-    width: 100%;
-    height: 80%;
-}
-
-
-.detail {
-    background-color:#D0ECE7;
-}
-.entete {
-    background-color: #D0ECE7;
-    border-bottom: 1px solid #566573;
-}
 
 .ligne{
     height: 1px;
@@ -73,6 +71,7 @@ body{
 }
 .btnClose{
     padding: 5px;
+    margin: 2px;
     border-bottom-left-radius : 5px;
     border-bottom-right-radius : 5px;
     background-color: #566573;
@@ -89,8 +88,11 @@ body{
     text-align: center;
 }
 .myspacex{
-    padding-left: 10px;
-    padding-right: 10px;
+    padding-left: 5px;
+    padding-right: 5px;
+}.myspacey{
+    padding-top: 8px;
+    padding-bottom: 8px;
 }
 
 .myspacexl{
@@ -98,21 +100,51 @@ body{
     padding-right: 5%;
 }
 
+ 
 
 
-.mybtn{
-    background-color: #566573;
+.mybtn{ 
+    padding: 7px;
+    padding-right: 10px; 
+    padding-left: 10px; 
+    margin: auto;
+    margin: auto;
+    border: 1px solid #566573;
+    background-color: white;
+    color: #566573;
+    min-width: 38px;
+    -webkit-border-radius: 30px;
+    -moz-border-radius: 30px;
+    border-radius: 30px;
+    Xfont-weight: bold;
+    cursor:pointer; 
+    text-decoration: none;
 }
+.mybtn:hover{
+    background-color: #566573;
+    text-decoration: none;
+    border: 1px solid #566573;
+    color: white;
+}
+
+ 
 
 
 .mytable {
     background-color: white;
+    -webkit-border-radius: 30px;
+    -moz-border-radius: 30px;
+    border-radius: 30px;
+    transition: 0.5s;
 }
 
 .mytable:hover {
-    background-color: #D0ECE7;
-    Xfont-style : italic;
-    transform: translateX(2px);
+    background-color: #EFF9EB;
+    font-style : italic;
+    transform: translateX(1px);
+    -webkit-border-radius: 30px;
+    -moz-border-radius: 30px;
+    border-radius: 30px;
 }
 
 
@@ -122,13 +154,198 @@ body{
     width: 10px;
   }
 ::-webkit-scrollbar-track {
-    box-shadow: inset 0 0 5px grey; 
-    border-radius: 10px;
+    Xbox-shadow: inset 0 0 5px red; 
+    Xborder-radius: 10px;
   }
 ::-webkit-scrollbar-thumb {
-    background: rgb(208, 171, 223); 
+    background: rgb(130, 105, 139); 
     border-radius: 10px;
   }
 ::-webkit-scrollbar-thumb:hover {
-    background: rgb(130, 105, 139); 
+    background: #8BB6C1; 
   }
+
+ 
+ 
+ 
+ 
+ 
+/* navigation */ 
+
+.menu {
+    display: flex;
+    flex-direction: row; /* Les éléments sont alignés en ligne horizontale */
+    justify-content: flex-start; /* Les éléments sont alignés au début de la ligne */
+    background-color: white;
+    align-items: stretch;
+    padding: 0px;
+    gap: 10px; /* Espace entre les éléments */
+}
+.item {
+    background-color: white;/* lightgrey;*/
+    padding: 5px;
+    Xborder: 1px solid #ccc;
+}
+.hover:hover {
+    background-color:  lightgrey;
+}
+.item:nth-child(4) {
+    margin-left: auto; /* Pousse cet élément et les suivants à droite */
+}
+.vertical-line {
+    width: 1px; /* Largeur du trait */
+    height: 70px; /* Hauteur du trait */
+    background-color: black; /* Couleur du trait */
+    margin: 5px 10px; /* Espace autour du trait */
+}
+.vertical-line2 {
+    width: 1px; /* Largeur du trait */
+    height: 40px; /* Hauteur du trait */
+    background-color: black; /* Couleur du trait */
+    margin: 5px 10px; /* Espace autour du trait */
+}
+
+.horizontal-line {
+    width: 100%; /* Largeur du trait */
+    height: 1px; /* Hauteur du trait */
+    Xbackground: linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet);
+    background-color:    black; /* Couleur du trait */
+    box-shadow: 1px 2px 6px 0 rgba(23, 40, 52, 0.08)
+}
+
+.input-container {
+    position: relative;
+    width: 300px;
+  }
+#search-input {
+    width: 100%;
+    padding: 10px 40px 10px 10px; /* Ajout de l'espace pour le bouton de remise à blanc */
+    box-sizing: border-box;
+    background: url('assets/images/loupe.svg') no-repeat 10px center;
+    background-size: 20px; /* Ajustez la taille de l'image */
+  }
+#filterCategorie {
+    Xwidth: 100%;
+    padding: 10px 10px 10px 10px;
+    box-sizing: border-box;
+}
+#clear-button {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+    display: none; /* Caché par défaut */
+}
+#search-input:not(:placeholder-shown) + #clear-button {
+    display: block;
+}
+
+
+
+
+.load-bar {
+    position: relative;
+    margin-top: 0px;
+    width: 100%;
+    height: 6px;
+    background-color: #fdba2c;
+  }
+  .bar {
+      
+    content: "";
+    display: inline;
+    position: absolute;
+    width: 0;
+    height: 100%;
+    left: 50%;
+    text-align: center;
+  }
+  .bar:nth-child(1) {
+    background-color: #da4733;
+    animation: loading 3s linear infinite;
+  }
+  .bar:nth-child(2) {
+    background-color: #3b78e7;
+    animation: loading 3s linear 1s infinite;
+  }
+  .bar:nth-child(3) {
+    background-color: #fdba2c;
+    animation: loading 3s linear 2s infinite;
+  }
+  @keyframes loading {
+      from {left: 50%; width: 0;z-index:100;}
+      33.3333% {left: 0; width: 100%;z-index: 10;}
+      to {left: 0; width: 100%;}
+  }
+
+
+/* Style de base pour l'input */
+input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    transition: box-shadow 0.3s ease-in-out; /* Transition pour un effet plus fluide */
+}
+/* Ombre lors de l'entrée dans l'input */
+input:focus {
+    outline: none; /* Supprime le contour par défaut de l'input */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Ajoute une ombre */
+    border-color: #007bff; /* Change la couleur de la bordure */
+}        
+/* Style de base pour le select */
+select {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    transition: box-shadow 0.3s ease-in-out; /* Transition pour un effet plus fluide */
+}
+/* Ombre lors de l'entrée dans le select */
+select:focus {
+    outline: none; /* Supprime le contour par défaut du select */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Ajoute une ombre */
+    border-color: #007bff; /* Change la couleur de la bordure */
+}
+
+.form-group {
+    position: relative;
+    margin-bottom: 20px;
+}
+/* Style de base pour le label */
+label {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+    font-size: 16px;
+    color: #aaa;
+    pointer-events: none;
+    transition: all 0.3s ease;
+}
+/* Déplacer le label vers le haut quand l'input est en focus ou contient du texte */
+input:focus + label,
+input:not(:placeholder-shown) + label {
+    top: -10px;
+    left: 10px;
+    font-size: 12px;
+    color: #007bff;
+}
+
+textarea:focus + label,
+textarea:not(:placeholder-shown) + label {
+    top: -10px;
+    left: 10px;
+    font-size: 12px;
+    color: #007bff;
+}
+
+select:focus + label,
+select:not(:placeholder-shown) + label {
+    top: -10px;
+    left: 10px;
+    font-size: 12px;
+    color: #007bff;
+}

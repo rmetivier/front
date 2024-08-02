@@ -8,6 +8,7 @@ import { UserState } from '../../store/user.reducer';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { Api } from 'src/app/backend/api.service';
+import { MessageService } from '../../message/message.service';
 
 @Component({
   selector: 'app-login',
@@ -21,7 +22,8 @@ export class LoginComponent implements OnInit {
               private userService: UserService,
               private router: Router,
               private route: ActivatedRoute,
-              private api: Api) {}
+              private api: Api,
+              private messageService: MessageService) {}
   ngOnInit() {
     this.store
       .select(getUser)
@@ -35,6 +37,7 @@ export class LoginComponent implements OnInit {
       var paramState = params.get('state'); 
       var paramCode  = params.get('code'); 
       if (paramState && paramState.includes('state_parameter_passthrough_value')) {
+        this.messageService.showMessage({ type: 'success', text: 'Chargement de nos favoris depuis votre compte Google ...', duration: 3000 });
         this.api.postOauth2(paramCode)
         .subscribe(
           (data) => {

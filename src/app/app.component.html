@@ -1,64 +1,9 @@
 <div class="page">
-  <div class="row entete">
-      <div class="col-6">
-        <img src="assets/images/favori.png" height="52px"/>
-        <span  href="#!" class="nav2" style="font-size: 200%">Mes Favoris</span>  
-      </div>
-      <div class="col-6 text-end" style="margin-top: 5px;" >
-        <span *ngIf="!isLogin"> 
-          <a  *ngIf="!isProd"
-              href="https://accounts.google.com/o/oauth2/v2/auth?scope=email&access_type=online&include_granted_scopes=true&response_type=code&state=state_parameter_passthrough_value&redirect_uri=http://localhost:4200/&client_id=69992971949-sggkh37fq9o0c9ecthpd0cevmgpa06ut.apps.googleusercontent.com"
-              class="mybtn btn btn-primary">
-              Se connecter avec son compte Google (local) 
-          </a>
-          <a *ngIf="isProd" 
-             href="https://accounts.google.com/o/oauth2/v2/auth?scope=email&access_type=online&include_granted_scopes=true&response_type=code&state=state_parameter_passthrough_value&redirect_uri=https://4me.elearnchess.com/&client_id=69992971949-sggkh37fq9o0c9ecthpd0cevmgpa06ut.apps.googleusercontent.com"
-             class="mybtn btn btn-primary">
-             Se connecter avec son compte Google
-          </a>
-          <app-login/>
-        </span>
-        <span *ngIf="isLogin" class="myspacex">
-            <b>{{username$ | async}}</b>
-          <!--| <a href="/api/initDB"  target="_new"  routerLinkActive="active" >Init Data</a> 
-          | <a routerLink="/favori"    routerLinkActive="active" >Mes favoris</a>
-          | <a routerLink="/profil"    routerLinkActive="active" >{{username$ | async}}</a>
-          -->
-          | <a (click)="logout()">Logout</a>
-        </span>
-      </div>
-  </div> <!--Fin entete -->
-  <div *ngIf="!isLogin"   class="blocHome" >
-    
-
-      <h2>
-      Si vous cherchez une solution efficace pour gérer vos liens préférés, vous êtes au bon endroit.<br>
-      </h2>
-      <h4>
-      Ce site offre une interface intuitive et conviviale, conçue pour vous permettre de classer et d'accéder rapidement à vos favoris. <br>
-      <br>
-      C'est également une démonstration de mes compétences techniques en développement web illustrant ainsi ma capacité à créer des applications web robustes et modernes.<br>
-      
-      <br>
-      De plus, je crois en la transparence et en la collaboration, c'est pourquoi tout le code source de ce site est disponible en open source. 
-      Vous pouvez explorer, modifier et contribuer à l'amélioration du projet.
-      Le code source Front Angular  accessible <a href="https://github.com/rmetivier/front">ici</a>,
-      le code source Back SpringBoot accessible <a href="https://github.com/rmetivier/backend">ici</a>
-      </h4>      
-      <br>
-      <h4>
-      Explorez la plateforme et découvrez comment elle peut transformer la gestion de vos favoris web. 
-      </h4>
-      <br>
-      <h2>
-      Bienvenue et bonne navigation !<br>
-      </h2>  
-
-      <br>
-
-      
-  </div>
-
-  
-  <router-outlet></router-outlet>
+    <!--app-favori/-->
+    <app-message style="position: fixed;text-decoration: none;right: 20px;bottom: 20px;"></app-message>
+    <app-home  *ngIf="!isLogin"  ></app-home>
+    <router-outlet></router-outlet>
 </div>
+
+
+
